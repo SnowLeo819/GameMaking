@@ -90,7 +90,7 @@ public class Game extends Thread{
 			JumpDown = true;
 		} else if(JumpUp && player.getJumpY() < player.getJumpSet()) player.jumpUp();
 		 else if(JumpDown && player.getJumpY() >= 0) player.jumpDown();
-		 else if(JumpDown && player.getJumpY() == 0) JumpDown = false;
+		 else /*if(JumpDown && player.getJumpY() == 0)*/ JumpDown = false;
 	}
 
 	// 점수반영..
@@ -207,7 +207,13 @@ public class Game extends Thread{
 	}
 	
 	private void drawPlayer(Graphics g){
-		g.drawImage(player.getImage(),player.getX(),player.getY(), null);
+		Image upImage = new ImageIcon("images/penguin_jump.png").getImage();
+		Image downImage = new ImageIcon("images/penguin_fall.png").getImage();
+		
+		if(JumpUp) g.drawImage(upImage,player.getX(),player.getY(), null);
+		else if(JumpDown) g.drawImage(downImage,player.getX(),player.getY(), null);
+		else g.drawImage(player.getImage(),player.getX(),player.getY(), null);
+		
 	}	
 	
 	private void drawHeart(Graphics g){
